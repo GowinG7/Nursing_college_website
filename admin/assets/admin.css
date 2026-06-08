@@ -1,0 +1,76 @@
+:root{
+  --primary:#1f7a3a;
+  --primary-dark:#155a28;
+  --primary-light:#e8f5ec;
+  --sidebar-bg:#0f2e1a;
+  --sidebar-text:#cfe6d6;
+  --bg:#f4f7f5;
+  --card:#fff;
+  --border:#e3e8e4;
+  --text:#1f2d24;
+  --muted:#6b7c70;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.admin-wrapper{display:flex;min-height:100vh}
+
+/* Sidebar */
+.sidebar{width:240px;background:var(--sidebar-bg);color:var(--sidebar-text);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sidebar .brand{display:flex;gap:.75rem;align-items:center;padding:1.25rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.sidebar .brand i{font-size:1.8rem;color:#7ed99a}
+.sidebar .brand strong{display:block;color:#fff;font-size:1.05rem}
+.sidebar .brand small{color:#9bb3a3;font-size:.75rem}
+.sidebar .nav{padding:1rem .5rem;gap:.15rem}
+.sidebar .nav-link{color:var(--sidebar-text);padding:.65rem .85rem;border-radius:8px;display:flex;align-items:center;gap:.6rem;font-size:.92rem;transition:all .15s}
+.sidebar .nav-link:hover{background:rgba(255,255,255,.06);color:#fff}
+.sidebar .nav-link.active{background:var(--primary);color:#fff;font-weight:600}
+.sidebar .nav-link i{font-size:1.05rem;width:20px}
+
+/* Main */
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:.9rem 1.5rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.topbar .user-info{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.92rem}
+.topbar .user-info i{font-size:1.4rem;color:var(--primary)}
+.content{padding:1.5rem;flex:1}
+
+/* Stat cards */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;justify-content:space-between;align-items:center;transition:transform .15s,box-shadow .15s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(31,122,58,.08)}
+.stat-card .label{color:var(--muted);font-size:.85rem;margin-bottom:.25rem}
+.stat-card .value{font-size:1.85rem;font-weight:700;color:var(--text)}
+.stat-card .icon{width:54px;height:54px;border-radius:12px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+
+/* Cards / tables */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem}
+.panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.panel-header h5{margin:0;font-weight:600}
+.table{margin-bottom:0}
+.table thead th{background:#f8faf9;border-bottom:2px solid var(--border);font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.table tbody td{vertical-align:middle}
+
+/* Buttons */
+.btn-primary{background:var(--primary);border-color:var(--primary)}
+.btn-primary:hover,.btn-primary:focus{background:var(--primary-dark);border-color:var(--primary-dark)}
+.btn-outline-primary{color:var(--primary);border-color:var(--primary)}
+.btn-outline-primary:hover{background:var(--primary);border-color:var(--primary)}
+
+/* Login */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1f7a3a,#0f2e1a);padding:1rem}
+.login-card{background:#fff;border-radius:16px;padding:2.25rem;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.login-card .logo{text-align:center;margin-bottom:1.5rem}
+.login-card .logo i{font-size:2.5rem;color:var(--primary)}
+.login-card h3{text-align:center;margin-bottom:.25rem}
+.login-card .subtitle{text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:.9rem}
+.form-control:focus{border-color:var(--primary);box-shadow:0 0 0 .2rem rgba(31,122,58,.15)}
+
+/* Badge */
+.badge-soft{background:var(--primary-light);color:var(--primary);font-weight:600;padding:.35em .7em;border-radius:6px}
+
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{position:fixed;left:-240px;transition:left .25s;z-index:100}
+  .sidebar.open{left:0}
+  .main{width:100%}
+  .topbar{padding:.9rem 1rem}
+}
