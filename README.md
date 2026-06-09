@@ -20,17 +20,11 @@ Built with **PHP + MySQL + Bootstrap 5 + jQuery (AJAX)**.
 2. **Start Apache and MySQL** from the XAMPP/WAMP control panel.
 
 3. **Create the database**:
-   - Open `http://localhost/phpmyadmin`
-   - Click **Import** and upload `sql/database.sql`
-   - Or run from terminal:
-     ```bash
-     mysql -u root -p < sql/database.sql
-     ```
+   
 
-4. **Configure DB credentials** in `includes/db.php` if your MySQL user/password is different.
-   Defaults: host=`localhost`, user=`root`, password=`` (empty), db=`bpkmch_nursing`.
+4. Configure DB credentials
 
-5. **Open in browser**: `http://localhost/bpkmch-nursing/`
+5. Open in browser
 
 ## Pages
 
@@ -55,32 +49,8 @@ Built with **PHP + MySQL + Bootstrap 5 + jQuery (AJAX)**.
 
 ## Customizing
 
-- **Colors / fonts**: edit CSS variables at the top of `assets/css/style.css`.
-- **Header/footer**: `includes/header.php`, `includes/footer.php` (shared).
-- **Add notice/program/faculty**: insert into respective MySQL table (or extend with an admin panel).
+- Colors / fonts: edit CSS variables at the top of `assets/css/style.css`.
+- Header/footer: `includes/header.php`, `includes/footer.php` (shared).
+- Add notice/program/faculty: insert into respective MySQL table (or extend with an admin panel).
 
-## File Structure
-```
-bpkmch-nursing/
-├── index.php
-├── about.php
-├── programs.php
-├── faculty.php
-├── admissions.php
-├── gallery.php
-├── notices.php
-├── contact.php
-├── includes/
-│   ├── db.php
-│   ├── header.php
-│   └── footer.php
-├── ajax/
-│   └── contact_submit.php
-├── assets/
-│   ├── css/style.css
-│   ├── js/main.js
-│   └── img/
-├── sql/
-│   └── database.sql
-└── README.md
-```
+
