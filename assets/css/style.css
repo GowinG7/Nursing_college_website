@@ -21,22 +21,6 @@ body {
   background: var(--bg);
   line-height: 1.6;
 }
-.logo-img {
-  height: 40px; /* adjust size */
-  width: auto;
-  vertical-align: middle;
-}
-
-.brand-text strong {
-  font-size: 18px;
-  line-height: 1.2;
-}
-
-.brand-text small {
-  font-size: 12px;
-  line-height: 1.2;
-}
-
 h1,
 h2,
 h3,
@@ -55,15 +39,18 @@ a {
   padding: 0.75rem 0;
 }
 .brand-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--green-600), var(--green-900));
-  color: #fff;
-  display: inline-flex;
+  width: 68px;
+  height: 68px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .brand-text strong {
   display: block;
@@ -419,5 +406,96 @@ section {
   }
   .cta-band {
     padding: 2rem;
+  }
+}
+
+/* ===== Footer fix: logo + text alignment ===== */
+.site-footer {
+  background: #0f3d2e;
+  color: #cfe7d8;
+}
+.site-footer a {
+  color: #cfe7d8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer a:hover {
+  color: #fff;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.footer-brand-text strong {
+  color: #fff;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.footer-brand-text span {
+  font-size: 0.85rem;
+  color: #b9d8c6;
+}
+
+.footer-title {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  position: relative;
+  padding-bottom: 0.4rem;
+}
+.footer-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 2px;
+  background: #28a745;
+  border-radius: 2px;
+}
+.footer-list li {
+  margin-bottom: 0.45rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 1rem;
+}
+.social-links a:hover {
+  background: #28a745;
+  color: #fff;
+}
+
+.footer-bottom {
+  background: rgba(0, 0, 0, 0.25);
+  color: #b9d8c6;
+}
+
+@media (max-width: 575.98px) {
+  .footer-brand {
+    justify-content: flex-start;
+  }
+  .footer-logo {
+    width: 50px;
+    height: 50px;
   }
 }
