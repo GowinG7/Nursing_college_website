@@ -37,6 +37,8 @@ a {
 /* NAVBAR */
 .navbar {
   padding: 0.75rem 0;
+  position: sticky;
+  z-index: 10;
 }
 .brand-logo {
   width: 68px;
@@ -255,26 +257,26 @@ section {
 
 /* STATS */
 .stats-strip {
-  background: #fff;
+  background: linear-gradient(135deg, var(--green-700), var(--green-900));
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(15, 61, 46, 0.08);
-  margin-top: -3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1rem;
+  margin-top: -60px; /* overlaps hero slightly for layered look */
   position: relative;
-  z-index: 5;
-  padding: 2rem;
+  z-index: 2;
 }
+
 .stat-item {
   text-align: center;
   padding: 0.5rem;
 }
 .stat-item h3 {
-  font-size: 2.2rem;
-  color: var(--green-700);
-  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 .stat-item p {
-  margin: 0;
-  color: var(--muted);
+  color: #ffffff;
   font-size: 0.9rem;
 }
 
@@ -327,7 +329,10 @@ section {
 /* FORM */
 .form-card {
   background: #fff;
+  position: sticky;
   padding: 2rem;
+  top: 100px;
+  z-index: 9;
   border-radius: 14px;
   border: 1px solid #e7ecea;
 }
@@ -429,8 +434,8 @@ section {
   gap: 16px;
 }
 .footer-logo {
-  width: 80px;
-  height: 80px;
+  width: 68px;
+  height: 68px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -441,11 +446,11 @@ section {
 }
 .footer-brand-text strong {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   letter-spacing: 0.5px;
 }
 .footer-brand-text span {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   color: #b9d8c6;
 }
 
@@ -495,7 +500,7 @@ section {
     justify-content: flex-start;
   }
   .footer-logo {
-    width: 50px;
-    height: 50px;
+    width: 68px;
+    height: 68px;
   }
 }
