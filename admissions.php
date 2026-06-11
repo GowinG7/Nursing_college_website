@@ -41,7 +41,7 @@ include 'includes/header.php'; ?>
       </div>
 
       <div class="col-lg-5">
-        <div class="form-card sticky-top" style="top:90px">
+        <div class="form-card sticky-top" style="top:180px">
           <h4 class="text-green">Important Dates</h4>
           <ul class="list-unstyled small text-muted">
             <li class="border-bottom py-2"><i class="bi bi-calendar-event me-2 text-green"></i>Form Distribution:
