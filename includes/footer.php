@@ -21,6 +21,7 @@
       <div class="col-md-2 col-6">
         <h6 class="footer-title">Quick Links</h6>
         <ul class="list-unstyled small footer-list">
+
           <li><a href="about.php">About Us</a></li>
           <li><a href="programs.php">Programs</a></li>
           <li><a href="admissions.php">Admissions</a></li>
@@ -28,13 +29,43 @@
         </ul>
       </div>
 
-      <!-- Contact -->
+      <!-- Contact
       <div class="col-md-3 col-6">
         <h6 class="footer-title">Contact</h6>
         <ul class="list-unstyled small footer-list">
           <li><i class="bi bi-geo-alt me-2"></i>Cancer Gate, Bharatpur, Chitwan</li>
           <li><i class="bi bi-telephone me-2"></i>+977-056-XXXXXXX</li>
           <li><i class="bi bi-envelope me-2"></i>info@bpkmch.edu.np</li>
+        </ul>
+      </div> -->
+
+      <!-- Contact -->
+      <div class="col-md-3 col-6">
+        <h6 class="footer-title">Contact</h6>
+
+        <ul class="list-unstyled small footer-list">
+
+          <a href="https://www.google.com/maps?q=Cancer+Gate+Bharatpur+Chitwan+Nepal" target="_blank"
+            class="footer-link">
+            <i class="bi bi-geo-alt me-2"></i>
+            Cancer Gate, Bharatpur, Chitwan
+          </a>
+          </li>
+
+          <li>
+            <a href="tel:+977056XXXXXXX" class="footer-link">
+              <i class="bi bi-telephone me-2"></i>
+              +977-056-XXXXXXX
+            </a>
+          </li>
+
+          <li>
+            <a href="mailto:info@bpkmch.edu.np" class="footer-link">
+              <i class="bi bi-envelope me-2"></i>
+              info@bpkmch.edu.np
+            </a>
+          </li>
+
         </ul>
       </div>
 
