@@ -4,9 +4,9 @@ require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/upload.php';
 require_login();
 
-/* =========================
+/* 
    CREATE / UPDATE NOTICE
-========================= */
+ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $id = (int) ($_POST['id'] ?? 0);
@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($title) {
 
-    /* =========================
+    /* 
        UPDATE NOTICE
-    ========================= */
+     */
     if ($id) {
 
       if ($image) {
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
 
-      /* =========================
+      /* 
          INSERT NOTICE
-      ========================= */
+       */
 
       $stmt = $conn->prepare("INSERT INTO notices (title, body, image, posted_on, created_at)
                                     VALUES (?,?,?, CURDATE(), NOW())");
@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-/* =========================
+/* 
    EDIT FETCH
-========================= */
+ */
 $edit = null;
 
 if (isset($_GET['edit'])) {
@@ -92,16 +92,16 @@ if (isset($_GET['edit'])) {
   $edit = $stmt->get_result()->fetch_assoc();
 }
 
-/* =========================
+/* 
    LIST ALL NOTICES
-========================= */
+ */
 $rows = $conn->query("SELECT * FROM notices ORDER BY posted_on DESC");
 
 include 'includes/header.php';
 ?>
 
 <?php if (isset($_GET['msg'])): ?>
-  <div class="alert alert-success">
+  <div class="alert alert-success auto-dismiss" id="successAlert">
     <?= htmlspecialchars($_GET['msg']) ?>
   </div>
 <?php endif; ?>
@@ -221,3 +221,5 @@ include 'includes/header.php';
 </div>
 
 <?php include 'includes/footer.php'; ?>
+
+<script src="assets/auto-diss.js"></script>

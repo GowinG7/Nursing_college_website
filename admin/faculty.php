@@ -61,7 +61,7 @@ include 'includes/header.php';
 ?>
 
 <?php if (isset($_GET['msg'])): ?>
-  <div class="alert alert-success">
+  <div class="alert alert-success auto-dismiss" id="successAlert">
     <?= htmlspecialchars($_GET['msg']) ?>
   </div>
 <?php endif; ?>
@@ -184,3 +184,5 @@ include 'includes/header.php';
 </div>
 
 <?php include 'includes/footer.php'; ?>
+
+<script src="assets/auto-diss.js"></script>

@@ -40,7 +40,7 @@ $programs = $conn->query("SELECT * FROM programs ORDER BY id DESC");
 include 'includes/header.php';
 ?>
 <?php if(isset($_GET['msg'])): ?>
-<div class="alert alert-success"><?= htmlspecialchars($_GET['msg']) ?></div>
+<div class="alert alert-success auto-dismiss" id="successAlert"><?= htmlspecialchars($_GET['msg']) ?></div>
 <?php endif; ?>
 
 <div class="row g-3">
@@ -89,3 +89,5 @@ include 'includes/header.php';
   </div>
 </div>
 <?php include 'includes/footer.php'; ?>
+
+<script src="assets/auto-diss.js"></script>
