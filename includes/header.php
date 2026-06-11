@@ -29,15 +29,15 @@ function nav_active($file)
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
-        <span class="brand-logo">
-          <img src="assets/img/logo.png" alt="Lab Logo" class="logo-img">
-        </span>
-        <span class="brand-text d-flex flex-column">
-          <strong>BPKMCH</strong>
-          <small class="text-muted">Nursing College</small>
+      <a class="navbar-brand d-flex align-items-center" href="index.php" style="gap:0.5rem;">
+        <img src="assets/img/logo.png" alt="BPKMCH Logo"
+          style="height:68px; width:68px; object-fit:contain; display:block;">
+        <span class="brand-text d-flex flex-column justify-content-center">
+          <strong style="font-size:1.05rem; line-height:1;">BPKMCH</strong>
+          <small class="text-muted" style="line-height:1;">Nursing College</small>
         </span>
       </a>
+
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
         <span class="navbar-toggler-icon"></span>
