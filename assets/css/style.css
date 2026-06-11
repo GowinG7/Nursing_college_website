@@ -95,16 +95,29 @@ a {
 
 /* HERO */
 .hero {
-  background: linear-gradient(
-    135deg,
-    var(--green-900) 0%,
-    var(--green-700) 100%
-  );
+  position: relative;
   color: #fff;
   padding: 5rem 0 6rem;
-  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 550px;
   overflow: hidden;
 }
+
+/* Dark overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.65),
+    /* darker at top */ rgba(0, 0, 0, 0.45) /* lighter at bottom */
+  );
+  z-index: 0;
+}
+
+/* Decorative radial highlight */
 .hero::after {
   content: "";
   position: absolute;
@@ -118,16 +131,43 @@ a {
     transparent 70%
   );
   border-radius: 50%;
+  z-index: 0;
 }
+
+/* Ensure content sits above overlays */
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headline styling */
 .hero h1 {
-  color: #fff;
+  font-family: "Merriweather", serif;
+  font-weight: 800;
   font-size: 2.8rem;
-  line-height: 1.2;
+  line-height: 1.25;
+  color: #ffffff;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
+
+/* Accent span inside headline */
+.hero h1 span {
+  color: var(--green-500); /* stronger green accent */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Lead paragraph */
 .hero p.lead {
-  opacity: 0.9;
-  max-width: 600px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #f1f1f1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
+  max-width: 650px;
 }
+
+/* Badge pill */
 .hero .badge-pill {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
