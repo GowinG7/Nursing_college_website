@@ -200,7 +200,7 @@ a {
 .hamburger {
   background: transparent;
   border: 1px solid var(--border);
-  color: var(--text);
+  color: #e5f0e9;
   font-size: 1.35rem;
   line-height: 1;
   padding: 0.3rem 0.5rem;
