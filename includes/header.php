@@ -28,7 +28,7 @@ function nav_active($file)
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
+    <div class="container-fluid px-lg-5">
       <a class="navbar-brand d-flex align-items-center" href="index.php" style="gap:0.5rem;">
         <img src="assets/img/logo.png" alt="BPKMCH Logo"
           style="height:68px; width:68px; object-fit:contain; display:block;">
@@ -53,6 +53,8 @@ function nav_active($file)
               href="faculty.php">Faculty</a></li>
           <li class="nav-item"><a class="nav-link <?php echo nav_active('admissions.php'); ?>"
               href="admissions.php">Admissions</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="results.php">Results</a></li> -->
+
           <li class="nav-item"><a class="nav-link <?php echo nav_active('gallery.php'); ?>"
               href="gallery.php">Gallery</a></li>
           <li class="nav-item"><a class="nav-link <?php echo nav_active('notices.php'); ?>"

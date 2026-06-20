@@ -1,5 +1,5 @@
 <footer class="site-footer mt-5">
-  <div class="container py-5">
+  <div class="container-fluid px-lg-5">
     <div class="row g-4 align-items-start">
 
       <!-- Brand -->
