@@ -3,6 +3,9 @@ $page_title = 'Home';
 include 'includes/db.php';
 include 'includes/header.php';
 
+// Fetch carousel slides
+$slides = $conn->query("SELECT * FROM carousel ORDER BY id DESC");
+
 // Latest notices
 $notices = $conn->query("SELECT * FROM notices ORDER BY posted_on DESC LIMIT 3");
 
@@ -10,43 +13,54 @@ $notices = $conn->query("SELECT * FROM notices ORDER BY posted_on DESC LIMIT 3")
 $programs = $conn->query("SELECT * FROM programs ORDER BY id ASC LIMIT 4");
 
 // Dynamic counts
-$programsCountQuery = $conn->query("SELECT COUNT(*) AS total_programs FROM programs");
-$programCount = $programsCountQuery->fetch_assoc()['total_programs'] ?? 0;
-
-$facultyCountQuery = $conn->query("SELECT COUNT(*) AS total_faculty FROM faculty");
-$facultyCount = $facultyCountQuery->fetch_assoc()['total_faculty'] ?? 0;
+$programCount = ($conn->query("SELECT COUNT(*) AS total_programs FROM programs")->fetch_assoc()['total_programs']) ?? 0;
+$facultyCount = ($conn->query("SELECT COUNT(*) AS total_faculty FROM faculty")->fetch_assoc()['total_faculty']) ?? 0;
 
 // Static values
 $alumniCount = "1500+";
 $clinicalExposure = "100%";
 ?>
 
-<!-- HERO -->
-<section class="hero d-flex align-items-center text-light" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('assets/img/bg-img.png');
-                background-position: center;
-                background-size: cover;
-                background-repeat: no-repeat;
-                min-height: 550px;
-                position: relative;">
-  <div class="container position-relative">
-    <div class="row">
-      <div class="col-lg-7">
-        <span class="badge-pill"><i class="bi bi-award-fill me-1"></i> Est. — Bharatpur, Nepal</span>
-        <h1 class="mt-3">Shaping Nepal's Next Generation of
-          <span style="color:#a6f0c6">Nursing Leaders</span>
-        </h1>
-        <p class="lead mt-3">
-          BPKMCH Nursing College, Cancer Gate Bharatpur — delivering quality nursing education,
-          clinical excellence and compassionate care since inception.
-        </p>
-        <div class="d-flex flex-wrap gap-2 mt-4">
-          <a href="admissions.php" class="btn btn-light px-4">Apply for Admission</a>
-          <a href="programs.php" class="btn btn-outline-light px-4">Explore Programs</a>
+<!-- HERO CAROUSEL -->
+<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5000"
+  data-bs-pause="false">
+  <div class="carousel-inner">
+    <?php $active = true;
+    while ($slide = $slides->fetch_assoc()): ?>
+      <div class="carousel-item <?= $active ? 'active' : '' ?>">
+        <div class="hero-slide position-relative">
+          <?php if ($slide['media_type'] === 'image'): ?>
+            <img src="<?= htmlspecialchars($slide['media_file']) ?>" alt="<?= htmlspecialchars($slide['title']) ?>"
+              class="hero-media">
+          <?php else: ?>
+            <video autoplay muted loop playsinline class="hero-media">
+              <source src="<?= htmlspecialchars($slide['media_file']) ?>" type="video/mp4">
+            </video>
+          <?php endif; ?>
+
+          <div class="hero-overlay"></div>
+
+          <div class="hero-content container">
+            <span class="badge-pill">
+              <i class="bi bi-award-fill me-1"></i> Est. — Bharatpur, Nepal
+            </span>
+            <h1 class="mt-3"><?= htmlspecialchars($slide['title']) ?></h1>
+            <?php if (!empty($slide['subtitle'])): ?>
+              <p class="lead mt-3"><?= htmlspecialchars($slide['subtitle']) ?></p>
+            <?php endif; ?>
+          </div>
         </div>
       </div>
-    </div>
+      <?php $active = false; endwhile; ?>
   </div>
-</section>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
 
 <!-- STATS -->
 <div class="container">
@@ -72,7 +86,6 @@ $clinicalExposure = "100%";
   </div>
 </div>
 
-
 <!-- WHY US -->
 <section>
   <div class="container">
@@ -80,48 +93,24 @@ $clinicalExposure = "100%";
     <p class="section-subtitle">A learning environment built around clinical excellence, compassionate care, and the
       realities of Nepal's healthcare system.</p>
     <div class="row g-4">
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-hospital"></i></div>
-          <h5>Hospital-Attached Campus</h5>
-          <p class="text-muted mb-0">Hands-on training inside one of Nepal's leading cancer hospitals.</p>
+      <?php
+      $features = [
+        ['icon' => 'hospital', 'title' => 'Hospital-Attached Campus', 'desc' => 'Hands-on training inside one of Nepal\'s leading cancer hospitals.'],
+        ['icon' => 'mortarboard', 'title' => 'Recognized Curriculum', 'desc' => 'Affiliated programs under TU and CTEVT, designed for global standards.'],
+        ['icon' => 'people', 'title' => 'Experienced Faculty', 'desc' => 'Mentorship from senior clinicians, researchers and educators.'],
+        ['icon' => 'globe2', 'title' => 'Global Career Pathways', 'desc' => 'Graduates serving in Nepal, Australia, UK, USA and the Middle East.'],
+        ['icon' => 'cash-coin', 'title' => 'Scholarships', 'desc' => 'Government and merit-based scholarships for eligible students.'],
+        ['icon' => 'heart', 'title' => 'Care-First Culture', 'desc' => 'Empathy, ethics and patient dignity at the core of everything we teach.']
+      ];
+      foreach ($features as $f): ?>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-<?= $f['icon'] ?>"></i></div>
+            <h5><?= $f['title'] ?></h5>
+            <p class="text-muted mb-0"><?= $f['desc'] ?></p>
+          </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-mortarboard"></i></div>
-          <h5>Recognized Curriculum</h5>
-          <p class="text-muted mb-0">Affiliated programs under TU and CTEVT, designed for global standards.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-people"></i></div>
-          <h5>Experienced Faculty</h5>
-          <p class="text-muted mb-0">Mentorship from senior clinicians, researchers and educators.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-globe2"></i></div>
-          <h5>Global Career Pathways</h5>
-          <p class="text-muted mb-0">Graduates serving in Nepal, Australia, UK, USA and the Middle East.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-cash-coin"></i></div>
-          <h5>Scholarships</h5>
-          <p class="text-muted mb-0">Government and merit-based scholarships for eligible students.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="bi bi-heart"></i></div>
-          <h5>Care-First Culture</h5>
-          <p class="text-muted mb-0">Empathy, ethics and patient dignity at the core of everything we teach.</p>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -157,25 +146,81 @@ $clinicalExposure = "100%";
   </div>
 </section>
 
-<!-- NOTICES -->
-<section>
+<section class="bg-light">
+
   <div class="container">
+
     <div class="d-flex justify-content-between align-items-end mb-4">
+
       <div>
-        <h2 class="section-title mb-0">Latest Notices</h2>
-        <p class="text-muted mb-0">Stay updated with announcements and events.</p>
+
+        <h2 class="section-title mb-0">
+          Latest Notices
+        </h2>
+
+        <p class="section-subtitle mb-0">
+          Stay updated with announcements and events.
+        </p>
+
       </div>
-      <a href="notices.php" class="btn btn-outline-primary btn-sm">View All</a>
+
+      <a href="notices.php" class="btn btn-outline-primary">
+        View All
+      </a>
+
     </div>
-    <?php while ($n = $notices->fetch_assoc()): ?>
-      <div class="notice-item">
-        <h5><?= htmlspecialchars($n['title']); ?></h5>
-        <div class="notice-date mb-1"><i
-            class="bi bi-calendar3 me-1"></i><?= date('M d, Y', strtotime($n['posted_on'])); ?></div>
-        <p class="mb-0 text-muted small"><?= htmlspecialchars($n['body']); ?></p>
-      </div>
-    <?php endwhile; ?>
+
+    <div class="row g-4">
+
+      <?php while ($n = $notices->fetch_assoc()): ?>
+
+        <div class="col-md-6 col-lg-4">
+
+          <div class="notice-card h-100">
+
+            <?php if (!empty($n['image']) && file_exists($n['image'])): ?>
+
+              <img src="<?= htmlspecialchars($n['image']) ?>" class="notice-image"
+                alt="<?= htmlspecialchars($n['title']) ?>">
+
+            <?php endif; ?>
+
+            <div class="notice-content">
+
+              <div class="notice-date">
+
+                <i class="bi bi-calendar3 me-1"></i>
+
+                <?= date('M d, Y', strtotime($n['posted_on'])) ?>
+
+              </div>
+
+              <h5 class="notice-title">
+
+                <?= htmlspecialchars($n['title']) ?>
+
+              </h5>
+
+              <p class="notice-body">
+
+                <?= htmlspecialchars(substr($n['body'], 0, 120)) ?>
+
+                <?= strlen($n['body']) > 120 ? '...' : '' ?>
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      <?php endwhile; ?>
+
+    </div>
+
   </div>
+
 </section>
 
 <!-- CTA -->
