@@ -5,8 +5,13 @@ $page_title = 'Gallery';
 include 'includes/db.php';
 include 'includes/header.php';
 
-$rs = $conn->query("SELECT * FROM gallery ORDER BY uploaded_on DESC");
 
+$rs = $conn->query("
+    SELECT *
+    FROM gallery
+    ORDER BY id DESC
+");
+?>
 ?>
 
 <header class="page-header">
@@ -42,23 +47,33 @@ $rs = $conn->query("SELECT * FROM gallery ORDER BY uploaded_on DESC");
         <?php while ($g = $rs->fetch_assoc()): ?>
 
           <?php
-          $imagePath = $g['image'];
-          $hasImage = !empty($imagePath) && file_exists($imagePath);
+          $imagePath = trim($g['image']);
+
+          $hasImage =
+            !empty($imagePath) &&
+            file_exists(__DIR__ . '/' . $imagePath);
           ?>
 
           <div class="col-sm-6 col-md-4 col-lg-3">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm h-100 gallery-card">
 
               <?php if ($hasImage): ?>
 
-                <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($g['title']) ?>" class="card-img-top"
-                  style="height:220px; object-fit:cover;">
+                <button type="button" class="gallery-image-btn" data-image="<?= htmlspecialchars($imagePath) ?>"
+                  data-title="<?= htmlspecialchars($g['title']) ?>">
+
+                  <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($g['title']) ?>"
+                    class="gallery-image">
+
+                </button>
 
               <?php else: ?>
 
                 <div class="d-flex align-items-center justify-content-center bg-light" style="height:220px;">
+
                   <i class="bi bi-image fs-1 text-muted"></i>
+
                 </div>
 
               <?php endif; ?>
@@ -70,14 +85,12 @@ $rs = $conn->query("SELECT * FROM gallery ORDER BY uploaded_on DESC");
                 </h6>
 
                 <?php if (!empty($g['caption'])): ?>
+
                   <p class="card-text small text-muted mb-2">
                     <?= htmlspecialchars($g['caption']) ?>
                   </p>
-                <?php endif; ?>
 
-                <small class="text-muted">
-                  <?= date('M d, Y', strtotime($g['uploaded_on'])) ?>
-                </small>
+                <?php endif; ?>
 
               </div>
 
@@ -90,10 +103,13 @@ $rs = $conn->query("SELECT * FROM gallery ORDER BY uploaded_on DESC");
       <?php else: ?>
 
         <div class="col-12 text-center py-5">
+
           <i class="bi bi-images fs-1 text-muted"></i>
+
           <p class="text-muted mt-3">
             No gallery images available yet.
           </p>
+
         </div>
 
       <?php endif; ?>
@@ -102,5 +118,88 @@ $rs = $conn->query("SELECT * FROM gallery ORDER BY uploaded_on DESC");
 
   </div>
 </section>
+
+<!-- IMAGE MODAL -->
+
+<div id="imageModal" class="image-modal">
+
+  <span class="image-modal-close">&times;</span>
+
+  <img id="modalImage" src="" alt="">
+
+  <div id="modalCaption"></div>
+
+</div>
+
+<div id="imageModal" class="image-modal">
+
+  <span class="image-modal-close">&times;</span>
+
+  <img id="modalImage" src="" alt="">
+
+  <div id="modalCaption"></div>
+
+</div>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const caption = document.getElementById("modalCaption");
+    const closeBtn = document.querySelector(".image-modal-close");
+
+    document.querySelectorAll(".gallery-image-btn").forEach(btn => {
+
+      btn.addEventListener("click", function () {
+
+        modal.classList.add("show");
+
+        modalImg.src = this.dataset.image;
+
+        caption.textContent = this.dataset.title || "";
+
+        document.body.style.overflow = "hidden";
+
+      });
+
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", function (e) {
+
+      if (e.target === modal) {
+
+        closeModal();
+
+      }
+
+    });
+
+    document.addEventListener("keydown", function (e) {
+
+      if (e.key === "Escape") {
+
+        closeModal();
+
+      }
+
+    });
+
+    function closeModal() {
+
+      modal.classList.remove("show");
+
+      modalImg.src = "";
+
+      document.body.style.overflow = "";
+
+    }
+
+  });
+
+</script>
 
 <?php include 'includes/footer.php'; ?>
