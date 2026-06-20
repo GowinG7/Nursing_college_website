@@ -48,11 +48,17 @@ $current = basename($_SERVER['PHP_SELF']);
         <a href="faculty.php" class="nav-link <?= $current == 'faculty.php' ? 'active' : '' ?>">
           <i class="bi bi-people"></i> Faculty
         </a>
+        <!-- <a href="results.php"  class="nav-link <?= $current === 'results.php' ? 'active' : '' ?>"><i class="bi bi-award"></i>
+          Results</a> -->
+
         <a href="gallery.php" class="nav-link <?= $current == 'gallery.php' ? 'active' : '' ?>">
           <i class="bi bi-images"></i> Gallery
         </a>
         <a href="notices.php" class="nav-link <?= $current == 'notices.php' ? 'active' : '' ?>">
           <i class="bi bi-megaphone"></i> Notices
+        </a>
+        <a href="carousel.php" class="nav-link <?= $current == 'carousel.php' ? 'active' : '' ?>">
+          <i class="bi bi-film"></i> Carousel
         </a>
         <a href="messages.php" class="nav-link <?= $current == 'messages.php' ? 'active' : '' ?>">
           <i class="bi bi-envelope"></i> Messages
