@@ -54,45 +54,31 @@ $rs = $conn->query("
             file_exists(__DIR__ . '/' . $imagePath);
           ?>
 
-          <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="col-md-6 col-lg-4">
 
-            <div class="card border-0 shadow-sm h-100 gallery-card">
+            <div class="gallery-card">
 
-              <?php if ($hasImage): ?>
+              <button type="button" class="gallery-image-btn" data-image="<?= htmlspecialchars($imagePath) ?>"
+                data-title="<?= htmlspecialchars($g['title']) ?>">
 
-                <button type="button" class="gallery-image-btn" data-image="<?= htmlspecialchars($imagePath) ?>"
-                  data-title="<?= htmlspecialchars($g['title']) ?>">
+                <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($g['title']) ?>"
+                  class="gallery-image">
 
-                  <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($g['title']) ?>"
-                    class="gallery-image">
+                <div class="gallery-overlay">
 
-                </button>
+                  <h5>
+                    <?= htmlspecialchars($g['title']) ?>
+                  </h5>
 
-              <?php else: ?>
-
-                <div class="d-flex align-items-center justify-content-center bg-light" style="height:220px;">
-
-                  <i class="bi bi-image fs-1 text-muted"></i>
+                  <?php if (!empty($g['caption'])): ?>
+                    <p>
+                      <?= htmlspecialchars($g['caption']) ?>
+                    </p>
+                  <?php endif; ?>
 
                 </div>
 
-              <?php endif; ?>
-
-              <div class="card-body">
-
-                <h6 class="card-title mb-2">
-                  <?= htmlspecialchars($g['title']) ?>
-                </h6>
-
-                <?php if (!empty($g['caption'])): ?>
-
-                  <p class="card-text small text-muted mb-2">
-                    <?= htmlspecialchars($g['caption']) ?>
-                  </p>
-
-                <?php endif; ?>
-
-              </div>
+              </button>
 
             </div>
 
