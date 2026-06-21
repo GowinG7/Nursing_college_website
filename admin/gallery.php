@@ -259,7 +259,7 @@ include 'includes/header.php';
 
   <div class="row g-3">
     <?php while ($g = $rows->fetch_assoc()): ?>
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="col-sm-6 col-md-4 col-lg-3" id="gallery-item-<?= $g['id'] ?>">
         <div class="gallery-card">
           <button type="button" class="gallery-media js-image-viewer" data-full="../<?= htmlspecialchars($g['image']) ?>"
             data-caption="<?= htmlspecialchars($g['title'] ?: 'Untitled') ?>" title="Click to view full image"
@@ -403,7 +403,84 @@ include 'includes/header.php';
       if (ev.key === 'Escape' || ev.keyCode === 27) closeModal();
     }, false);
   })();
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.btn-delete').forEach(function (btn) {
+
+      btn.addEventListener('click', function () {
+
+        if (!confirm('Delete this image?')) {
+          return;
+        }
+
+        const id = this.dataset.id;
+        const type = this.dataset.type;
+
+        fetch('ajax/delete.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/x-www-form-urlencoded'
+          },
+          body:
+            'id=' + encodeURIComponent(id) +
+            '&type=' + encodeURIComponent(type)
+        })
+
+          .then(response => response.json())
+
+          .then(data => {
+
+            if (data.success) {
+
+              const card =
+                document.getElementById(
+                  'gallery-item-' + id
+                );
+
+              if (card) {
+
+                card.style.transition =
+                  'all .3s ease';
+
+                card.style.opacity = '0';
+
+                card.style.transform =
+                  'scale(.9)';
+
+                setTimeout(() => {
+                  card.remove();
+                }, 300);
+
+              }
+
+            } else {
+
+              alert(
+                data.message ||
+                'Delete failed.'
+              );
+
+            }
+
+          })
+
+          .catch(() => {
+
+            alert(
+              'Unable to connect to server.'
+            );
+
+          });
+
+      });
+
+    });
+
+  });
 </script>
 
-<?php include 'includes/footer.php'; ?>
 <script src="assets/auto-diss.js"></script>
+<?php include 'includes/footer.php'; ?>
