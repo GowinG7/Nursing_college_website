@@ -12,7 +12,6 @@ $rs = $conn->query("
     ORDER BY id DESC
 ");
 ?>
-?>
 
 <header class="page-header">
   <div class="container">
