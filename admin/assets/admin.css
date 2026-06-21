@@ -449,8 +449,8 @@ a {
 
 @media (max-width: 575.98px) {
   .user-info {
-    padding: 0;
-    background: transparent;
+    padding: 0.2rem 0.7rem 0.2rem 0.2rem;
+    background: #fff;
   }
 
   .user-info .avatar {
